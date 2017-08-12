@@ -1,0 +1,1 @@
+{"version":3,"sources":["../src/index.js"],"names":["value"],"mappings":";;;;;;AAAA;;;;AACA;;;;;;kBAEe,sDAA6B;AAC1CA,SAAO;AADmC,CAA7B,C","file":"index.js","sourcesContent":["import BezierEditor from \"./BezierEditor\";\nimport uncontrollable from \"uncontrollable\";\n\nexport default uncontrollable(BezierEditor, {\n  value: \"onChange\"\n});\n"]}
