@@ -19,6 +19,8 @@ function onDownHandle(h, e) {
     hover: null,
     down: h,
   });
+  window.addEventListener('mousemove', this.onDownMove);
+  window.addEventListener('mouseup', this.onDownUp);
 }
 
 function onLeaveHandle() {
@@ -112,6 +114,8 @@ export default class BezierEditor extends Component {
   };
 
   onDownUp = () => {
+    window.removeEventListener('mousemove', this.onDownMove);
+    window.removeEventListener('mouseup', this.onDownUp);
     // this.onDownMove(e);
     this.setState({
       down: 0,
@@ -194,8 +198,8 @@ export default class BezierEditor extends Component {
     const containerEvents = readOnly || !down
       ? {}
       : {
-          onMouseMove: this.onDownMove,
-          onMouseUp: this.onDownUp,
+          // onMouseMove: this.onDownMove,
+          // onMouseUp: this.onDownUp,
           onMouseLeave: this.onDownLeave,
         };
     const handle1Events = readOnly || down
