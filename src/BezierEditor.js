@@ -35,6 +35,7 @@ export default class BezierEditor extends Component {
   static propTypes = {
     value: PropTypes.array,
     onChange: PropTypes.func,
+    onFinish: PropTypes.func,
     width: PropTypes.number,
     height: PropTypes.number,
     padding: PropTypes.array,
@@ -56,6 +57,7 @@ export default class BezierEditor extends Component {
 
   static defaultProps = {
     value: [0.25, 0.25, 0.75, 0.75],
+    onFinish: () => {},
     width: 300,
     height: 300,
     padding: [25, 5, 25, 18],
@@ -110,6 +112,7 @@ export default class BezierEditor extends Component {
     this.setState({
       down: 0,
     });
+    this.props.onFinish(this.props.value);
   };
 
   positionForEvent = e => {
