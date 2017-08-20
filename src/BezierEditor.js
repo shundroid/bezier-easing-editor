@@ -21,6 +21,8 @@ function onDownHandle(h, e) {
   });
   window.addEventListener('mousemove', this.onDownMove);
   window.addEventListener('mouseup', this.onDownUp);
+  window.addEventListener('touchmove', this.onDownMove);
+  window.addEventListener('touchend', this.onDownUp);
 }
 
 function onLeaveHandle() {
@@ -109,6 +111,8 @@ export default class BezierEditor extends Component {
   onDownUp = () => {
     window.removeEventListener('mousemove', this.onDownMove);
     window.removeEventListener('mouseup', this.onDownUp);
+    window.removeEventListener('touchmove', this.onDownMove);
+    window.removeEventListener('touchend', this.onDownUp);
     this.setState({
       down: 0,
     });
@@ -117,7 +121,9 @@ export default class BezierEditor extends Component {
 
   positionForEvent = e => {
     const rect = this.refs.root.getBoundingClientRect();
-    return [e.clientX - rect.left, e.clientY - rect.top];
+    const x = e.touches ? e.touches[0].clientX : e.clientX;
+    const y = e.touches ? e.touches[0].clientY : e.clientY;
+    return [x - rect.left, y - rect.top];
   };
 
   x = value => {
@@ -196,6 +202,7 @@ export default class BezierEditor extends Component {
       ? {}
       : {
           onMouseDown: this.onDownHandle1,
+          onTouchStart: this.onDownHandle1,
           onMouseEnter: this.onEnterHandle1,
           onMouseLeave: this.onLeaveHandle1,
         };
@@ -203,6 +210,7 @@ export default class BezierEditor extends Component {
       ? {}
       : {
           onMouseDown: this.onDownHandle2,
+          onTouchStart: this.onDownHandle2,
           onMouseEnter: this.onEnterHandle2,
           onMouseLeave: this.onLeaveHandle2,
         };
