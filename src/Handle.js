@@ -75,7 +75,8 @@ export default class Handle extends BezierComponent {
         fill={down ? background: handleColor}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
-        onMouseDown={onMouseDown} />
+        onMouseDown={onMouseDown}
+        onTouchStart={onMouseDown} />
     </g>;
   }
 }
